@@ -1,0 +1,28 @@
+{
+  "name": "boardmembers",
+  "version": "1.0.0",
+  "description": "App for updating board members of an organization",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/mapachurro/boardMembers.git"
+  },
+  "keywords": [
+    "SQL",
+    "express"
+  ],
+  "author": "Oliver JL Renwick",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/mapachurro/boardMembers/issues"
+  },
+  "homepage": "https://github.com/mapachurro/boardMembers#readme",
+  "dependencies": {
+    "express": "^4.16.4",
+    "express-handlebars": "^3.0.0",
+    "mysql": "^2.16.0"
+  }
+}
