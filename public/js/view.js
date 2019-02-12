@@ -132,7 +132,6 @@ $(document).ready(function () {
         member.text,
         "</span>",
         "<input type='text' class='edit' style='display: none;'>",
-        // "<button class='delete btn btn-danger'>x</button>",
         "<button class='complete btn btn-primary'>Remove</button>",
         "</li>"
       ].join("")
@@ -157,7 +156,6 @@ $(document).ready(function () {
         "</span>",
         "<input type='text' class='edit' style='display: none;'>",
         "<button class='delete btn btn-danger'>x</button>",
-        // "<button class='complete btn btn-primary'>Remove</button>",
         "</li>"
       ].join("")
     );

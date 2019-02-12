@@ -1,9 +1,9 @@
-.todo-list {
+.member-list {
   margin: 0 auto;
   margin-top: 75px;
 }
 
-input.new-item:focus {
+input.new-member:focus {
   outline: none;
 }
 
