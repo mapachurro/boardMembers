@@ -1,4 +1,4 @@
-$(document).ready(function() {
+$(document).ready(function () {
   // Getting a reference to the input field where user adds a new todo
   var $newItemInput = $("input.new-item");
   // Our new todos will go inside the todoContainer
@@ -21,6 +21,7 @@ $(document).ready(function() {
 
   // Getting todos from database when page loads
   getMembers();
+  getFormers();
 
   // This function resets the todos displayed with new todos from the database
   function initializeRows() {
@@ -32,31 +33,36 @@ $(document).ready(function() {
     $memberContainer.prepend(rowsToAdd);
   }
 
-    // This function fills the former members column
-    function initializeFormer() {
-      $formerContainer.empty();
-      var formerToAdd = [];
-      for (var i = 0; i < formers.length; i++) {
-        formerToAdd.push(createNewRow(formers[i]));
-      }
-      $formerContainer.prepend(formerToAdd);
-    }
-
   // This function grabs todos from the database and updates the view
   function getMembers() {
-    $.get("/api/members", function(data) {
+    $.get("/api/members", function (data) {
       members = data;
       initializeRows();
     });
   }
 
-    // This function grabs todos from the database and updates the view
-    function getFormers() {
-      // $.get("/api/members", function(data) {
-      //   members = data;
-        initializeFormer();
-      // });
+  // This function fills the former members column
+  function initializeFormer() {
+    $formerContainer.empty();
+    var formerToAdd = [];
+    for (var i = 0; i < formers.length; i++) {
+      formerToAdd.push(createFormerRow(formers[i]));
     }
+    $formerContainer.prepend(formerToAdd);
+  }
+
+  // This function grabs former members from the database and updates the view
+  function getFormers() {
+    $.get("/api/formers", function (data) {
+      formers = data;
+      console.log("Former board members are: " + formers)
+      initializeFormer();
+    });
+  }
+
+
+
+
 
   // This function deletes a todo when the user clicks the delete button
   function deleteMember(event) {
@@ -79,13 +85,13 @@ $(document).ready(function() {
     $(this).children("input.edit").focus();
   }
 
-  // // Toggles complete status
-  // function toggleComplete(event) {
-  //   event.stopPropagation();
-  //   var member = $(this).parent().data("member");
-  //   member.complete = !member.complete;
-  //   updateMember(member);
-  // }
+  // Toggles complete status
+  function toggleComplete(event) {
+    event.stopPropagation();
+    var member = $(this).parent().data("member");
+    member.complete = !member.complete;
+    updateMember(member);
+  }
 
   // This function starts updating a member in the database if a user hits the "Enter Key"
   // While in edit mode
@@ -102,9 +108,9 @@ $(document).ready(function() {
   function updateMember(member) {
     $.ajax({
       method: "PUT",
-      url: "/api/todos",
+      url: "/api/members",
       data: member
-    }).then(getMembers);
+    }).then(getMembers, getFormers);
   }
 
   // This function is called whenever a todo item is in edit mode and loses focus
@@ -119,7 +125,7 @@ $(document).ready(function() {
     }
   }
 
-  // This function constructs a todo-item row
+  // This function constructs a new member row
   function createNewRow(member) {
     var $newInputRow = $(
       [
@@ -128,8 +134,8 @@ $(document).ready(function() {
         member.text,
         "</span>",
         "<input type='text' class='edit' style='display: none;'>",
-        "<button class='delete btn btn-danger'>x</button>",
-        // "<button class='complete btn btn-primary'>✓</button>",
+        // "<button class='delete btn btn-danger'>x</button>",
+        "<button class='complete btn btn-primary'>Remove</button>",
         "</li>"
       ].join("")
     );
@@ -138,6 +144,29 @@ $(document).ready(function() {
     $newInputRow.find("input.edit").css("display", "none");
     $newInputRow.data("member", member);
     if (member.complete) {
+      $newInputRow.find("span").css("text-decoration", "line-through");
+    }
+    return $newInputRow;
+  }
+
+  // This function constructs a former member row
+  function createFormerRow(former) {
+    var $newInputRow = $(
+      [
+        "<li class='list-group-item todo-item'>",
+        "<span>",
+        former.text,
+        "</span>",
+        "<input type='text' class='edit' style='display: none;'>",
+        "<button class='delete btn btn-danger'>x</button>",
+        // "<button class='complete btn btn-primary'>Remove</button>",
+        "</li>"
+      ].join("")
+    );
+    $newInputRow.find("button.delete").data("id", former.id);
+    $newInputRow.find("input.edit").css("display", "none");
+    $newInputRow.data("member", former);
+    if (former.complete) {
       $newInputRow.find("span").css("text-decoration", "line-through");
     }
     return $newInputRow;

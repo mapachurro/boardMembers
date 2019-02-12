@@ -278,6 +278,11 @@ If you are experiencing a Heroku connection error, this could be why.
 Good Luck!
 
 
-
---Make the board member's name appear in the 'current board members' panel
---When deleted, make the board member's name appear in the 'former board members' panel
+--Adjust members loaded to those who are not completed
+--
+--When deleted:
+--Change the functionality of the delete button to a complete button
+--Change the board member's status to 'completed'
+--Build an API get route for completed members
+--Build a database query for completed members
+--Set up functions to populate former members panel from completed members 
