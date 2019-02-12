@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <title>ABC Corporation Board Member Management System</title>
+  <!-- Latest compiled and minified CSS & JS -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootswatch/4.0.0/lumen/bootstrap.min.css" />
+  <link rel="stylesheet" href="css/styles.css" media="screen" title="no title">
+  <script src="https://code.jquery.com/jquery.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+</head>
+
+<body style="background: gray">
+
+    <div class="jumbotron jumbotron-fluid" style="background: cornflowerblue">
+        <div class="container">
+          <h1 class="display-4">ABC Corporation</h1>
+          <p class="lead"> Board Member Management System</p>
+        </div>
+      </div>
+
+  <div class="container">
+    <div class="row">
+      <div class="col-md-6 offset-md-3">
+            <form id="member-form">
+              <div class="container">
+                <div class="row">
+                  <div class="col-10">
+                    <input class="new-item form-control" placeholder="Add a Board member" type="text" />
+                  </div>
+                  <div class="col-2">
+                    <button type="submit" class="btn btn-success">Add</button>
+                  </div>
+                </div>
+              </div>
+            </form>
+      </div>
+    </div>
+    <!-- End of input box row -->
+    <br>
+    <br>
+
+    <div class="row">
+      <div class="col-md-4 offset-md-1">
+        <div class="card" style="width: 18rem;">
+            <div id="currentmembers" class="card-body">
+              <h5 class="card-title">Current Board Members</h5>
+              <h6 class="card-subtitle mb-2 text-muted">Board members that have been added</h6>
+              <p class="card-text">We are proud to have these esteemed members of our Board guiding ABC Corporation.</p>
+              <ul class="list-group member-list">
+                <li class="list-group-item new-item">
+                </li>
+                <span class="member-container">
+                </span>
+              </ul>
+            </div>
+          </div>
+
+      </div>
+
+      <div class="col-md-4 offset-md-3">
+        <div class="card" style="width: 18rem;">
+            <div id="formermembers" class="card-body">
+              <h5 class="card-title">Former Board Members</h5>
+              <h6 class="card-subtitle mb-2 text-muted">Board members that have been removed</h6>
+              <p class="card-text">If this list does not load automatically, please refresh the page.</p>
+              <ul class="list-group member-list">
+                <li class="list-group-item new-item">
+                </li>
+                <span class="former-container">
+                </span>
+              </ul>
+
+
+            </div>
+          </div>
+      </div>
+
+    </div>
+
+
+
+  </div>
+  <!-- Custom Script -->
+  <script src="js/view.js" type="text/javascript"></script>
+
+</body>
+
+</html>
