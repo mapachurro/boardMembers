@@ -3,6 +3,8 @@ $(document).ready(function() {
   var $newItemInput = $("input.new-item");
   // Our new todos will go inside the todoContainer
   var $memberContainer = $(".member-container");
+  // The container for ex-members
+  var $formerContainer = $(".former-container")
   // Adding event listeners for deleting, editing, and adding members
   $(document).on("click", "button.delete", deleteMember);
   $(document).on("click", "button.complete", toggleComplete);
@@ -11,8 +13,11 @@ $(document).ready(function() {
   $(document).on("blur", ".member-item", cancelEdit);
   $(document).on("submit", "#member-form", insertMember);
 
-  // Our initial todos array
+  // Our initial members array
   var members = [];
+
+  // Our initial former members array
+  var formers = [];
 
   // Getting todos from database when page loads
   getMembers();
@@ -31,10 +36,10 @@ $(document).ready(function() {
     function initializeFormer() {
       $formerContainer.empty();
       var formerToAdd = [];
-      for (var i = 0; i < members.length; i++) {
-        formerToAdd.push(createNewRow(members[i]));
+      for (var i = 0; i < formers.length; i++) {
+        formerToAdd.push(createNewRow(formers[i]));
       }
-      $memberContainer.prepend(formerToAdd);
+      $formerContainer.prepend(formerToAdd);
     }
 
   // This function grabs todos from the database and updates the view
@@ -45,14 +50,24 @@ $(document).ready(function() {
     });
   }
 
+    // This function grabs todos from the database and updates the view
+    function getFormers() {
+      // $.get("/api/members", function(data) {
+      //   members = data;
+        initializeFormer();
+      // });
+    }
+
   // This function deletes a todo when the user clicks the delete button
   function deleteMember(event) {
     event.stopPropagation();
     var id = $(this).data("id");
+    var name = $(this).data("text");
+    formers.push(name);
     $.ajax({
       method: "DELETE",
       url: "/api/members/" + id
-    }).then(getMembers);
+    }).then(getFormers);
   }
 
   // This function handles showing the input box for a user to edit a todo
@@ -64,13 +79,13 @@ $(document).ready(function() {
     $(this).children("input.edit").focus();
   }
 
-  // Toggles complete status
-  function toggleComplete(event) {
-    event.stopPropagation();
-    var member = $(this).parent().data("member");
-    member.complete = !member.complete;
-    updateMember(member);
-  }
+  // // Toggles complete status
+  // function toggleComplete(event) {
+  //   event.stopPropagation();
+  //   var member = $(this).parent().data("member");
+  //   member.complete = !member.complete;
+  //   updateMember(member);
+  // }
 
   // This function starts updating a member in the database if a user hits the "Enter Key"
   // While in edit mode

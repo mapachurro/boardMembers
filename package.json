@@ -1,0 +1,26 @@
+{
+  "name": "boardmembers",
+  "version": "1.0.0",
+  "description": "A Heroku-deployed SQL app for updating a webpage showing the board members of an organization.",
+  "main": "server.js",
+  "dependencies": {
+    "express": "^4.16.4",
+    "mysql2": "^1.6.5",
+    "sequelize": "^4.42.0"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/mapachurro/boardMembers.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/mapachurro/boardMembers/issues"
+  },
+  "homepage": "https://github.com/mapachurro/boardMembers#readme"
+}
