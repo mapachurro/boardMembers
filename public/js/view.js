@@ -1,7 +1,7 @@
 $(document).ready(function () {
-  // Getting a reference to the input field where user adds a new todo
+  // Getting a reference to the input field where user adds a new board member
   var $newItemInput = $("input.new-item");
-  // Our new todos will go inside the todoContainer
+  // Our new members will go inside the memberContainer
   var $memberContainer = $(".member-container");
   // The container for ex-members
   var $formerContainer = $(".former-container")
@@ -19,11 +19,11 @@ $(document).ready(function () {
   // Our initial former members array
   var formers = [];
 
-  // Getting todos from database when page loads
+  // Getting members from database when page loads
   getMembers();
   getFormers();
 
-  // This function resets the todos displayed with new todos from the database
+  // This function resets the members displayed with new members from the database
   function initializeRows() {
     $memberContainer.empty();
     var rowsToAdd = [];
@@ -33,7 +33,7 @@ $(document).ready(function () {
     $memberContainer.prepend(rowsToAdd);
   }
 
-  // This function grabs todos from the database and updates the view
+  // This function grabs members from the database and updates the view
   function getMembers() {
     $.get("/api/members", function (data) {
       members = data;
@@ -60,11 +60,8 @@ $(document).ready(function () {
     });
   }
 
-
-
-
-
-  // This function deletes a todo when the user clicks the delete button
+  // This function deletes a member when the user clicks the delete button
+  // Note -- only available after member is already 'complete'
   function deleteMember(event) {
     event.stopPropagation();
     var id = $(this).data("id");
@@ -76,7 +73,7 @@ $(document).ready(function () {
     }).then(getFormers);
   }
 
-  // This function handles showing the input box for a user to edit a todo
+  // This function handles showing the input box for a user to edit a member
   function editMember() {
     var currentMember = $(this).data("member");
     $(this).children().hide();
@@ -91,12 +88,13 @@ $(document).ready(function () {
     var member = $(this).parent().data("member");
     member.complete = !member.complete;
     updateMember(member);
+    getFormers();
   }
 
   // This function starts updating a member in the database if a user hits the "Enter Key"
   // While in edit mode
   function finishEdit(event) {
-    var updatedMember = $(this).data("todo");
+    var updatedMember = $(this).data("member");
     if (event.which === 13) {
       updatedMember.text = $(this).children("input").val().trim();
       $(this).blur();
@@ -104,7 +102,7 @@ $(document).ready(function () {
     }
   }
 
-  // This function updates a todo in our database
+  // This function updates a member in our database
   function updateMember(member) {
     $.ajax({
       method: "PUT",
@@ -113,7 +111,7 @@ $(document).ready(function () {
     }).then(getMembers, getFormers);
   }
 
-  // This function is called whenever a todo item is in edit mode and loses focus
+  // This function is called whenever a member item is in edit mode and loses focus
   // This cancels any edits being made
   function cancelEdit() {
     var currentMember = $(this).data("member");
@@ -129,7 +127,7 @@ $(document).ready(function () {
   function createNewRow(member) {
     var $newInputRow = $(
       [
-        "<li class='list-group-item todo-item'>",
+        "<li class='list-group-item member-item'>",
         "<span>",
         member.text,
         "</span>",
@@ -153,7 +151,7 @@ $(document).ready(function () {
   function createFormerRow(former) {
     var $newInputRow = $(
       [
-        "<li class='list-group-item todo-item'>",
+        "<li class='list-group-item member-item'>",
         "<span>",
         former.text,
         "</span>",
@@ -172,7 +170,7 @@ $(document).ready(function () {
     return $newInputRow;
   }
 
-  // This function inserts a new todo into our database and then updates the view
+  // This function inserts a new member into our database and then updates the view
   function insertMember(event) {
     event.preventDefault();
     var member = {

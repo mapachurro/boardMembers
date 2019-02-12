@@ -27,13 +27,11 @@ module.exports = function(app) {
 
     // GET route for former members
     app.get("/api/formers", function(req, res) {
-      // findAll returns all entries for a table when used with no options
       db.Member.findAll({
         where: {
           complete: true
         }
       }).then(function(dbMember) {
-        // We have access to the todos as an argument inside of the callback function
         res.json(dbMember);
       });
     });
