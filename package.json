@@ -1,0 +1,33 @@
+{
+  "name": "boardmembers",
+  "version": "1.0.0",
+  "description": "A Heroku-deployed mySQL database application to manage a list of board members at a company.",
+  "main": "server.js",
+  "dependencies": {
+    "express": "^4.16.4",
+    "mysql2": "^1.6.5",
+    "sequelize": "^4.42.0"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/mapachurro/boardMembers.git"
+  },
+  "keywords": [
+    "heroku",
+    "mySQL",
+    "boostrap",
+    "node",
+    "javascript"
+  ],
+  "author": "Oliver JL Renwick",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/mapachurro/boardMembers/issues"
+  },
+  "homepage": "https://github.com/mapachurro/boardMembers#readme"
+}
