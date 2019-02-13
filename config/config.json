@@ -1,7 +1,7 @@
 {
   "development": {
     "username": "root",
-    "password": "",
+    "password": "Man0Negra",
     "database": "boardmembers",
     "host": "127.0.0.1",
     "port": 3306,
@@ -9,17 +9,17 @@
   },
   "test": {
     "username": "root",
-    "password": "",
+    "password": "Man0Negra",
     "database": "boardmembers",
     "host": "127.0.0.1",
     "port": 3306,
     "dialect": "mysql"
   },
   "production": {
-    "username": "root",
-    "password": "",
-    "database": "boardmembers",
-    "host": "127.0.0.1",
+    "username": "nhjmc4y0fqhwnb0t",
+    "password": "upiixo8zv16ehv3z",
+    "database": "kpw7o6bwch8munnr",
+    "host": "x3ztd854gaa7on6s.cbetxkdyhwsb.us-east-1.rds.amazonaws.com",
     "port": 3306,
     "dialect": "mysql"
   }
